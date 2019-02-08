@@ -1,7 +1,8 @@
-package com.nicolashurtado.messagingapp
+package com.nicolashurtado.messagingapp.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.nicolashurtado.messagingapp.R
 
 class MessagingActivity : AppCompatActivity() {
 
