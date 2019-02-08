@@ -35,8 +35,15 @@ dependencies {
     // Koin
     implementation 'org.koin:koin-android:1.0.2'
     implementation 'org.koin:koin-androidx-scope:1.0.2'
-
+    //Gson
     implementation 'com.google.code.gson:gson:2.8.5'
+    //Room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "android.arch.paging:runtime:1.0.1"
+
+    //Workers
+    implementation "android.arch.work:work-runtime:$work_version"
 
     testImplementation 'junit:junit:4.12'
 

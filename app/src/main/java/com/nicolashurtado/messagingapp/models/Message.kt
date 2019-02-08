@@ -1,8 +1,12 @@
 package com.nicolashurtado.messagingapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Message(
-    val attachments: List<Attachment>,
-    val content: String,
-    val id: Int,
-    val userId: Int
+        @PrimaryKey val id: Int,
+        val userId: Int,
+        val attachments: List<Attachment>?,
+        val content: String
 )
