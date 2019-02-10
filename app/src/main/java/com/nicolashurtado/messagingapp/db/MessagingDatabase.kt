@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.google.gson.Gson
 import com.nicolashurtado.messagingapp.db.daos.AttachmentDao
 import com.nicolashurtado.messagingapp.db.daos.MessageDao
+import com.nicolashurtado.messagingapp.db.daos.PublicationDao
 import com.nicolashurtado.messagingapp.db.daos.UserDao
 import com.nicolashurtado.messagingapp.db.entities.Attachment
 import com.nicolashurtado.messagingapp.db.entities.Message
@@ -21,6 +22,7 @@ abstract class MessagingDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun messageDao(): MessageDao
     abstract fun attachmentDao(): AttachmentDao
+    abstract fun publicationDao(): PublicationDao
 
     companion object : SingletonHolder<MessagingDatabase, Context>({
         Room.inMemoryDatabaseBuilder(it.applicationContext, MessagingDatabase::class.java).build()

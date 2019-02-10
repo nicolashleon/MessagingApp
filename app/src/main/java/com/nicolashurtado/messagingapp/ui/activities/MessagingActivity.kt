@@ -19,8 +19,8 @@ class MessagingActivity : AppCompatActivity() {
 
     override fun onPostResume() {
         super.onPostResume()
-        viewModel.getMessages().observe(this, Observer { messages ->
-            print("MESSAGES $messages")
+        viewModel.getPublications().observe(this, Observer { publications ->
+            print("MESSAGES $publications.size")
         })
     }
 }
