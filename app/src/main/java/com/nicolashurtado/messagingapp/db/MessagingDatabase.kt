@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import com.nicolashurtado.messagingapp.dao.MessageDao
-import com.nicolashurtado.messagingapp.dao.UserDao
+import com.google.gson.Gson
+import com.nicolashurtado.messagingapp.DataLoader
+import com.nicolashurtado.messagingapp.daos.MessageDao
+import com.nicolashurtado.messagingapp.daos.UserDao
+import com.nicolashurtado.messagingapp.models.Attachment
+import com.nicolashurtado.messagingapp.models.Chat
 import com.nicolashurtado.messagingapp.models.Message
 import com.nicolashurtado.messagingapp.models.User
 
@@ -18,18 +19,24 @@ abstract class MessagingDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun messageDao(): MessageDao
 
-    companion object {
-        private const val DATABASE_NAME = "Messaging"
+    companion object : SingletonHolder<MessagingDatabase, Context>({
+        Room.inMemoryDatabaseBuilder(it.applicationContext, MessagingDatabase::class.java).build()
+    })
 
-        fun buildDatabase(context: Context): MessagingDatabase {
-            return Room.databaseBuilder(context, MessagingDatabase::class.java, DATABASE_NAME)
-                    .addCallback(object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequest.Builder(SeedDatabaseWorker::class.java).build()
-                            WorkManager.getInstance().enqueue(request)
-                        }
-                    }).build()
+    fun loadDataFromFile(context: Context, gson: Gson, fileName: String) {
+        runInTransaction {
+            val chat = DataLoader<Chat>(gson).loadData(context, fileName, Chat::class.java)
+            chat?.users?.let {
+                userDao().insertAll(*it.toTypedArray())
+            }
+            chat?.messages?.let {
+                messageDao().insertAll(*it.toTypedArray())
+            }
+            val attachments = ArrayList<Attachment>()
+            chat?.messages?.forEach {
+                attachments.addAll(it.attachments)
+            }
         }
+
     }
 }
