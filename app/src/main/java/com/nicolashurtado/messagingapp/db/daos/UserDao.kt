@@ -1,4 +1,4 @@
-package com.nicolashurtado.messagingapp.daos
+package com.nicolashurtado.messagingapp.db.daos
 
 import androidx.room.Dao
 import androidx.room.Insert

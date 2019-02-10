@@ -1,4 +1,4 @@
-package com.nicolashurtado.messagingapp.daos
+package com.nicolashurtado.messagingapp.db.daos
 
 import androidx.paging.DataSource
 import androidx.room.Dao
