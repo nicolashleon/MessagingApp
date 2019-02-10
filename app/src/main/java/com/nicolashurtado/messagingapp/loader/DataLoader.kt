@@ -1,4 +1,4 @@
-package com.nicolashurtado.messagingapp
+package com.nicolashurtado.messagingapp.loader
 
 import android.content.Context
 import com.google.gson.Gson

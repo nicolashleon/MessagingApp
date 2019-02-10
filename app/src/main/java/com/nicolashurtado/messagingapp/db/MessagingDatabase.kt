@@ -5,14 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.Gson
-import com.nicolashurtado.messagingapp.DataLoader
+import com.nicolashurtado.messagingapp.loader.DataLoader
 import com.nicolashurtado.messagingapp.daos.AttachmentDao
 import com.nicolashurtado.messagingapp.daos.MessageDao
 import com.nicolashurtado.messagingapp.daos.UserDao
-import com.nicolashurtado.messagingapp.entities.Attachment
-import com.nicolashurtado.messagingapp.entities.Message
-import com.nicolashurtado.messagingapp.entities.User
-import com.nicolashurtado.messagingapp.models.Chat
+import com.nicolashurtado.messagingapp.db.entities.Attachment
+import com.nicolashurtado.messagingapp.db.entities.Message
+import com.nicolashurtado.messagingapp.db.entities.User
+import com.nicolashurtado.messagingapp.loader.models.Chat
 
 
 @Database(entities = [User::class, Message::class, Attachment::class], version = 1, exportSchema = false)

@@ -8,7 +8,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.google.gson.Gson
 import com.nicolashurtado.messagingapp.db.MessagingDatabase
-import com.nicolashurtado.messagingapp.entities.Message
+import com.nicolashurtado.messagingapp.db.entities.Message
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
