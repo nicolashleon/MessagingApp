@@ -28,9 +28,9 @@ abstract class MessagingDatabase : RoomDatabase() {
         Room.inMemoryDatabaseBuilder(it.applicationContext, MessagingDatabase::class.java).build()
     })
 
-    fun loadDataFromFile(context: Context, gson: Gson, fileName: String) {
+    fun loadDataFromFile(dataLoader: DataLoader, fileName: String) {
         runInTransaction {
-            val chat = DataLoader<Chat>(gson).loadData(context, fileName, Chat::class.java)
+            val chat = dataLoader.loadData(fileName, Chat::class.java)
             chat?.users?.let {
                 userDao().insertAll(*(it.map { user ->
                     User(user.id, user.name, user.avatarId)
