@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.google.gson.Gson
-import com.nicolashurtado.messagingapp.loader.DataLoader
 import com.nicolashurtado.messagingapp.db.daos.AttachmentDao
 import com.nicolashurtado.messagingapp.db.daos.MessageDao
 import com.nicolashurtado.messagingapp.db.daos.UserDao
 import com.nicolashurtado.messagingapp.db.entities.Attachment
 import com.nicolashurtado.messagingapp.db.entities.Message
 import com.nicolashurtado.messagingapp.db.entities.User
+import com.nicolashurtado.messagingapp.loader.DataLoader
 import com.nicolashurtado.messagingapp.loader.models.Chat
 
 
@@ -43,9 +43,11 @@ abstract class MessagingDatabase : RoomDatabase() {
 
             val attachments = ArrayList<Attachment>()
             chat?.messages?.forEach { message ->
-                attachments.addAll(message.attachments.map { attachment ->
-                    Attachment(attachment.id, message.id, attachment.thumbnailUrl, attachment.title, attachment.url)
-                })
+                if (message.attachments != null) {
+                    attachments.addAll(message.attachments.map { attachment ->
+                        Attachment(attachment.id, message.id, attachment.thumbnailUrl, attachment.title, attachment.url)
+                    })
+                }
             }
 
             attachmentDao().insertAll(*attachments.toTypedArray())
