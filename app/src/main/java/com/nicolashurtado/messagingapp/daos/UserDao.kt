@@ -2,7 +2,7 @@ package com.nicolashurtado.messagingapp.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
-import com.nicolashurtado.messagingapp.models.User
+import com.nicolashurtado.messagingapp.entities.User
 
 @Dao
 interface UserDao {

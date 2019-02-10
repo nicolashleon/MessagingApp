@@ -8,13 +8,10 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.google.gson.Gson
 import com.nicolashurtado.messagingapp.db.MessagingDatabase
-import com.nicolashurtado.messagingapp.models.Message
+import com.nicolashurtado.messagingapp.entities.Message
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
 
 class MessageViewModel(private val database: MessagingDatabase, private val gson: Gson) : ViewModel() {
 
@@ -23,8 +20,8 @@ class MessageViewModel(private val database: MessagingDatabase, private val gson
         val factory: DataSource.Factory<Int, Message> = database.messageDao().getAllPaged()
 
         val pagedListBuilder: LivePagedListBuilder<Int, Message> = LivePagedListBuilder<Int, Message>(
-            factory,
-            50
+                factory,
+                50
         )
         pagedListBuilder.build()
     }
