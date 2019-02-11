@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width_stroke">1dp</dimen>
+    <dimen name="padding_message_border">10dp</dimen>
+    <dimen name="size_icon">48dp</dimen>
+    <dimen name="normal">16dp</dimen>
+    <dimen name="half">8dp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
+    <dimen name="zero">0dp</dimen>
+</resources>

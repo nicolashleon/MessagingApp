@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/half"
+    android:layout_marginEnd="@dimen/half">
+
+    <ImageView
+        android:id="@+id/image_view_user"
+        android:layout_width="@dimen/size_icon"
+        android:layout_height="@dimen/size_icon"
+        android:layout_margin="@dimen/half"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layout_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        tools:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:id="@+id/layout_message"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/half"
+        android:background="@drawable/border_external_message_layout"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/layout_attachments"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@id/image_view_user"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_view_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/half"
+            android:layout_marginEnd="@dimen/half"
+            android:textStyle="bold"
+            tools:text="Roxanne A." />
+
+        <TextView
+            android:id="@+id/text_view_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/half"
+            tools:text="iusto eius quod necessitatibus culpa ea, odit magnam ut saepe sed non qui\ntempora atque nihil\naccusamus illum doloribus illo dolor\neligendi repudiandae odit magni similique sed cum maiores" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/zero"
+        app:layout_constraintGuide_percent=".90" />
+
+    <LinearLayout
+        android:id="@+id/layout_attachments"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
+        android:layout_margin="@dimen/half"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@id/layout_message"
+        app:layout_constraintTop_toBottomOf="@id/layout_message" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
