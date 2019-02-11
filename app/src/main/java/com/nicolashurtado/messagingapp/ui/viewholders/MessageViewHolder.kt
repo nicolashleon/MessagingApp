@@ -29,7 +29,6 @@ open class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 bindAttachments(it)
             }
         }
-
     }
 
     private fun bindAttachments(attachment: Attachment) {
