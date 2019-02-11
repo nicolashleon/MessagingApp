@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.nicolashurtado.messagingapp.db.MessagingDatabase
+import com.nicolashurtado.messagingapp.db.entities.Attachment
+import com.nicolashurtado.messagingapp.db.entities.Message
 import com.nicolashurtado.messagingapp.db.entities.Publication
 import com.nicolashurtado.messagingapp.loader.DataLoader
 import kotlinx.coroutines.CoroutineScope
@@ -47,5 +49,17 @@ class MessageViewModel(private val database: MessagingDatabase, private val data
 
     fun getPublications(): LiveData<PagedList<Publication>> {
         return publicationsLiveData
+    }
+
+    fun deleteMessage(message: Message) {
+        CoroutineScope(Dispatchers.IO).launch {
+            database.messageDao().delete(message)
+        }
+    }
+
+    fun deleteAttachment(attachment: Attachment) {
+        CoroutineScope(Dispatchers.IO).launch {
+            database.attachmentDao().delete(attachment)
+        }
     }
 }
