@@ -65,6 +65,5 @@ class MessagingActivity : AppCompatActivity(), MessageAdapter.OnMessageLongClick
                     dialog.dismiss()
                 }
                 .show()
-
     }
 }
