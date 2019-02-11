@@ -7,7 +7,8 @@ import com.nicolashurtado.messagingapp.db.entities.Publication
 import com.nicolashurtado.messagingapp.ui.CircleTransformation
 import com.squareup.picasso.Picasso
 
-class ExternalMessageViewHolder(view: View) : MessageViewHolder(view) {
+class ExternalMessageViewHolder(view: View, listener: OnMessageLongClickListener) :
+        MessageViewHolder(view, listener) {
 
     private val userImageView by lazy { itemView.findViewById<ImageView>(R.id.image_view_user) }
 
