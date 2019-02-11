@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.nicolashurtado.messagingapp.BuildConfig
+import com.nicolashurtado.messagingapp.BuildConfig.DATA_SEED_FILE_NAME
 import com.nicolashurtado.messagingapp.R
 import com.nicolashurtado.messagingapp.ui.adapters.MessageAdapter
 import com.nicolashurtado.messagingapp.ui.adapters.PublicationDiffUtil
@@ -26,13 +26,14 @@ class MessagingActivity : AppCompatActivity() {
         title = getString(R.string.activity_messages_label)
 
         //TODO Move data loading outside the activity to avoid issues when the screen gets recreated.
-        viewModel.loadData(BuildConfig.DATA_SEED_FILE_NAME)
+        viewModel.loadData(DATA_SEED_FILE_NAME)
         val adapter = MessageAdapter(PublicationDiffUtil()).apply {
             setHasStableIds(true)
         }
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
         viewModel.getPublications().observe(this, Observer { publications ->
             adapter.submitList(publications)
         })

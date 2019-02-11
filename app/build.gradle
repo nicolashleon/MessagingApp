@@ -21,6 +21,7 @@ android {
             buildConfigField "String", "DATA_SEED_FILE_NAME", "\"data.json\""
         }
         release {
+            buildConfigField "String", "DATA_SEED_FILE_NAME", "\"data.json\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -39,9 +40,10 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // Koin
-    implementation 'org.koin:koin-android:1.0.2'
-    implementation 'org.koin:koin-androidx-scope:1.0.2'
-    implementation 'org.koin:koin-androidx-viewmodel:1.0.2'
+    def koin_version = "1.0.2"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     //Gson
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -50,6 +52,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.1'
 
     //Room
+    //TODO move these dependencies to stable version when available.
     def room_version = "2.1.0-alpha04"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
