@@ -21,6 +21,7 @@ android {
             buildConfigField "String", "DATA_SEED_FILE_NAME", "\"data.json\""
         }
         release {
+            buildConfigField "String", "DATA_SEED_FILE_NAME", "\"data.json\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
