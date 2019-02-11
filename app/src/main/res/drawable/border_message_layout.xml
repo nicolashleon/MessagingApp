@@ -9,6 +9,6 @@
         android:right="@dimen/padding_message_border"
         android:top="@dimen/padding_message_border" />
     <stroke
-        android:width="@dimen/stroke_width"
+        android:width="@dimen/width_stroke"
         android:color="@color/gray" />
 </shape>

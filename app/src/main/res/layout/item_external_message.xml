@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/image_view_user"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
+        android:layout_width="@dimen/size_icon"
+        android:layout_height="@dimen/size_icon"
         android:layout_margin="@dimen/half"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/layout_message"
