@@ -1,7 +1,6 @@
 package com.nicolashurtado.messagingapp.ui.activities
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,8 +16,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MessagingActivity : AppCompatActivity() {
 
     private val viewModel: MessageViewModel by viewModel()
-    private val recyclerView : RecyclerView by lazy { findViewById<RecyclerView>(R.id.recycler_view) }
-    private val progressBar : ProgressBar by lazy { findViewById<ProgressBar>(R.id.progress_bar) }
+    private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.recycler_view) }
+    private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progress_bar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
