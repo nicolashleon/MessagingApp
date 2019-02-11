@@ -51,9 +51,7 @@ abstract class MessagingDatabase : RoomDatabase() {
                     })
                 }
             }
-
             attachmentDao().insertAll(*attachments.toTypedArray())
         }
-
     }
 }
