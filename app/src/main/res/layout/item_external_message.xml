@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/normal">
+    android:layout_marginStart="@dimen/half"
+    android:layout_marginEnd="@dimen/half">
 
     <ImageView
         android:id="@+id/image_view_user"
@@ -20,10 +21,9 @@
 
     <LinearLayout
         android:id="@+id/layout_message"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/half"
-        android:layout_marginEnd="64dp"
         android:background="@drawable/border_external_message_layout"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/layout_attachments"
@@ -51,21 +51,23 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".90"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="0dp"
+        app:layout_constraintGuide_percent=".90" />
 
     <LinearLayout
         android:id="@+id/layout_attachments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
         android:layout_margin="@dimen/half"
+        android:gravity="start"
         android:orientation="vertical"
         android:visibility="gone"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintStart_toEndOf="@id/layout_message"
         app:layout_constraintTop_toBottomOf="@id/layout_message" />
 

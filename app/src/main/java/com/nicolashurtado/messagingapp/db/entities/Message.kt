@@ -9,4 +9,11 @@ import androidx.room.PrimaryKey
         parentColumns = ["id"], onDelete = ForeignKey.CASCADE)])
 data class Message(@PrimaryKey @ColumnInfo(name = "message_id") var id: Int,
                    @ColumnInfo(name = "user_id") var userId: Int,
-                   var content: String)
+                   var content: String) {
+
+    companion object {
+        private const val LOGGED_USER_ID = 1
+    }
+
+    fun isExternal() = userId != LOGGED_USER_ID
+}

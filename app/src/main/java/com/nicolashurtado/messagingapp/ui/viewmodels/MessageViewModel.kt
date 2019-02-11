@@ -28,6 +28,7 @@ class MessageViewModel(private val database: MessagingDatabase, private val data
     private val publicationsLiveData: LiveData<PagedList<Publication>> by lazy {
 
         val pageConfig = PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
                 .setInitialLoadSizeHint(INITIAL_LOAD_SIZE)
                 .setMaxSize(PAGE_MAX_SIZE)
                 .setPageSize(PAGE_SIZE)

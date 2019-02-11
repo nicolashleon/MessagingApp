@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MessagingApp</string>
+    <string name="txt_me">Me</string>
+    <string name="activity_messages_label">Messages</string>
 </resources>
