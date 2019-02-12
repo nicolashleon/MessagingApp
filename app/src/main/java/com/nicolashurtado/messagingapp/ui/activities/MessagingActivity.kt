@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.nicolashurtado.messagingapp.BuildConfig.DATA_SEED_FILE_NAME
 import com.nicolashurtado.messagingapp.R
 import com.nicolashurtado.messagingapp.db.entities.Attachment
 import com.nicolashurtado.messagingapp.db.entities.Message
@@ -27,8 +26,6 @@ class MessagingActivity : AppCompatActivity(), MessageAdapter.OnMessageLongClick
         setContentView(R.layout.activity_messaging)
         title = getString(R.string.activity_messages_label)
 
-        //TODO Move data loading outside the activity to avoid issues when the screen gets recreated.
-        viewModel.loadData(DATA_SEED_FILE_NAME)
         val adapter = MessageAdapter(PublicationDiffUtil(), this).apply {
             setHasStableIds(true)
         }
