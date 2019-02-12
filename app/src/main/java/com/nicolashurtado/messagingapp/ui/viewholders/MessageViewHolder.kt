@@ -33,8 +33,9 @@ open class MessageViewHolder(view: View, private val listener: OnMessageLongClic
         }
         userNameTextView.text = itemView.context.getString(R.string.txt_me)
         contentTextView.text = publication.message.content
+        attachmentsLayout.removeAllViews()
+
         if (publication.attachments.isEmpty()) {
-            attachmentsLayout.removeAllViews()
             attachmentsLayout.visibility = View.GONE
         } else {
             attachmentsLayout.visibility = View.VISIBLE
