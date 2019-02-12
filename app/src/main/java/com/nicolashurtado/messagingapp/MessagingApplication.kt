@@ -40,7 +40,5 @@ class MessagingApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin(this, listOf(appModule))
-        val repository: MessageRepository = get()
-        repository.loadData(DATA_SEED_FILE_NAME)
     }
 }

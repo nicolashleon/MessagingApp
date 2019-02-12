@@ -3,6 +3,7 @@ package com.nicolashurtado.messagingapp.db
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.nicolashurtado.messagingapp.BuildConfig
 import com.nicolashurtado.messagingapp.db.daos.AttachmentDao
 import com.nicolashurtado.messagingapp.db.daos.MessageDao
 import com.nicolashurtado.messagingapp.db.daos.PublicationDao
@@ -46,6 +47,12 @@ class MessageRepository(private val attachmentDao: AttachmentDao,
 
         val pagedListBuilder: LivePagedListBuilder<Int, Publication> =
                 LivePagedListBuilder<Int, Publication>(publicationDao.getAllPaged(), pageConfig.build())
+                        .setBoundaryCallback(object : PagedList.BoundaryCallback<Publication>() {
+                            override fun onZeroItemsLoaded() {
+                                super.onZeroItemsLoaded()
+                                loadData(BuildConfig.DATA_SEED_FILE_NAME)
+                            }
+                        })
         pagedListBuilder.build()
     }
 
