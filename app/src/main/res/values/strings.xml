@@ -5,4 +5,6 @@
     <string name="txt_title_delete_attachment_confirmation">Delete attachment?</string>
     <string name="txt_title_delete_message_confirmation">Delete message?</string>
     <string name="txt_delete_button">Delete</string>
+    <string name="txt_delete_attachment_error">There was an error deleting the attachment</string>
+    <string name="txt_delete_message_error">There was an error deleting the message</string>
 </resources>

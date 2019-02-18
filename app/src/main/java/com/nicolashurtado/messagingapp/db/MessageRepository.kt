@@ -3,26 +3,17 @@ package com.nicolashurtado.messagingapp.db
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.nicolashurtado.messagingapp.BuildConfig
 import com.nicolashurtado.messagingapp.db.daos.AttachmentDao
 import com.nicolashurtado.messagingapp.db.daos.MessageDao
 import com.nicolashurtado.messagingapp.db.daos.PublicationDao
-import com.nicolashurtado.messagingapp.db.daos.SeedDao
 import com.nicolashurtado.messagingapp.db.entities.Attachment
 import com.nicolashurtado.messagingapp.db.entities.Message
 import com.nicolashurtado.messagingapp.db.entities.Publication
-import com.nicolashurtado.messagingapp.db.entities.User
-import com.nicolashurtado.messagingapp.loader.DataLoader
-import com.nicolashurtado.messagingapp.loader.models.Chat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MessageRepository(private val attachmentDao: AttachmentDao,
                         private val publicationDao: PublicationDao,
                         private val messageDao: MessageDao,
-                        private val seedDao: SeedDao,
-                        private val dataLoader: DataLoader) {
+                        private val boundaryCallback: PublicationBoundaryCallback) {
 
     companion object {
         private const val PAGE_SIZE = 10
@@ -47,38 +38,8 @@ class MessageRepository(private val attachmentDao: AttachmentDao,
 
         val pagedListBuilder: LivePagedListBuilder<Int, Publication> =
                 LivePagedListBuilder<Int, Publication>(publicationDao.getAllPaged(), pageConfig.build())
-                        .setBoundaryCallback(object : PagedList.BoundaryCallback<Publication>() {
-                            override fun onZeroItemsLoaded() {
-                                super.onZeroItemsLoaded()
-                                loadData(BuildConfig.DATA_SEED_FILE_NAME)
-                            }
-                        })
+                        .setBoundaryCallback(boundaryCallback)
         pagedListBuilder.build()
-    }
-
-    fun loadData(fileName: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-
-            val chat = dataLoader.loadData(fileName, Chat::class.java)
-
-            val users = chat?.users?.map { user ->
-                User(user.id, user.name, user.avatarId)
-            }.orEmpty()
-
-            val messages = chat?.messages?.map { message ->
-                Message(message.id, message.userId, message.content)
-            }.orEmpty()
-
-            val attachments = ArrayList<Attachment>()
-            chat?.messages?.forEach { message ->
-                if (message.attachments != null) {
-                    attachments.addAll(message.attachments.map { attachment ->
-                        Attachment(attachment.id, message.id, attachment.thumbnailUrl, attachment.title, attachment.url)
-                    })
-                }
-            }
-            seedDao.loadDatabase(users, messages, attachments)
-        }
     }
 
     fun getAllPublicationsPaged(): LiveData<PagedList<Publication>> {
@@ -86,14 +47,10 @@ class MessageRepository(private val attachmentDao: AttachmentDao,
     }
 
     fun deleteMessage(message: Message) {
-        CoroutineScope(Dispatchers.IO).launch {
-            messageDao.delete(message)
-        }
+        messageDao.delete(message)
     }
 
     fun deleteAttachment(attachment: Attachment) {
-        CoroutineScope(Dispatchers.IO).launch {
-            attachmentDao.delete(attachment)
-        }
+        attachmentDao.delete(attachment)
     }
 }

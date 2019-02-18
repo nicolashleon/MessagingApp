@@ -1,17 +1,21 @@
 package com.nicolashurtado.messagingapp.ui.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.nicolashurtado.messagingapp.R
 import com.nicolashurtado.messagingapp.db.entities.Attachment
 import com.nicolashurtado.messagingapp.db.entities.Message
 import com.nicolashurtado.messagingapp.ui.adapters.MessageAdapter
 import com.nicolashurtado.messagingapp.ui.adapters.PublicationDiffUtil
+import com.nicolashurtado.messagingapp.ui.errors.Error
 import com.nicolashurtado.messagingapp.ui.viewmodels.MessageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +24,7 @@ class MessagingActivity : AppCompatActivity(), MessageAdapter.OnMessageLongClick
     private val viewModel: MessageViewModel by viewModel()
     private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.recycler_view) }
     private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.progress_bar) }
+    private val constraintLayout: ConstraintLayout by lazy { findViewById<ConstraintLayout>(R.id.constraint_layout) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +38,26 @@ class MessagingActivity : AppCompatActivity(), MessageAdapter.OnMessageLongClick
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        viewModel.getErrorData().observe(this, Observer {
+            handleError(it)
+        })
+
         viewModel.getPublications().observe(this, Observer { publications ->
             adapter.submitList(publications)
         })
+    }
+
+    private fun handleError(error: Error) {
+        when (error) {
+            is Error.AttachmentDeleteError -> {
+                println(error.throwable)
+                Snackbar.make(constraintLayout, R.string.txt_delete_attachment_error, Snackbar.LENGTH_SHORT).show()
+            }
+            is Error.MessageDeleteError -> {
+                println(error.throwable)
+                Snackbar.make(constraintLayout, R.string.txt_delete_message_error, Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onAttachmentClicked(attachment: Attachment) {

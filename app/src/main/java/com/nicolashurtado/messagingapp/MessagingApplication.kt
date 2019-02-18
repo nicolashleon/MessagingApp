@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.nicolashurtado.messagingapp.BuildConfig.DATA_SEED_FILE_NAME
 import com.nicolashurtado.messagingapp.db.MessageRepository
 import com.nicolashurtado.messagingapp.db.MessagingDatabase
+import com.nicolashurtado.messagingapp.db.PublicationBoundaryCallback
 import com.nicolashurtado.messagingapp.loader.DataLoader
 import com.nicolashurtado.messagingapp.ui.viewmodels.MessageViewModel
 import org.koin.android.ext.android.get
@@ -30,8 +31,11 @@ class MessagingApplication : Application() {
             }
             single {
                 val db: MessagingDatabase = get()
-                MessageRepository(db.attachmentDao(), db.publicationDao(), db.messageDao(),
-                        db.seedDao(), get())
+                PublicationBoundaryCallback(get(), db.seedDao())
+            }
+            single {
+                val db: MessagingDatabase = get()
+                MessageRepository(db.attachmentDao(), db.publicationDao(), db.messageDao(), get())
             }
             viewModel { MessageViewModel(get()) }
         }
